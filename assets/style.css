@@ -218,6 +218,7 @@ header {
   position: absolute;
   bottom: 40px;
   display: flex;
+  cursor: pointer;
 }
 .dot {
   margin-inline: 5px;

@@ -18,35 +18,31 @@ const slides = [
   },
 ];
 
-// Create the banner with JS
-
 let bannerDiv = document.querySelector("#banner");
-let basseImg = 0;
+let baseImg = 0;
 
-//intégration de la flèche  de gauche
 let arrowLeft = document.createElement("img");
 arrowLeft.classList.add("arrow", "arrow_left");
 arrowLeft.src = "./assets/images/arrow_left.png";
-//function sur le click left
+
 arrowLeft.addEventListener("click", function () {
-  basseImg = (basseImg - 1 + slides.length) % slides.length; // calcule reste division de la valeur précédente
+  baseImg = (baseImg - 1 + slides.length) % slides.length;
   updateBanner();
 });
 
 let bannerImg = document.createElement("img");
 bannerImg.className = "banner-img";
-bannerImg.src = "./assets/images/slideshow/" + slides[basseImg].image;
+bannerImg.src = "./assets/images/slideshow/" + slides[baseImg].image;
 
 let bannerTagline = document.createElement("p");
-bannerTagline.innerHTML = slides[basseImg].tagLine;
+bannerTagline.innerHTML = slides[baseImg].tagLine;
 
-//intégration de la flèche  de droite
 let arrowRightImg = document.createElement("img");
 arrowRightImg.classList.add("arrow", "arrow_right");
 arrowRightImg.src = "./assets/images/arrow_right.png";
-//function sur le click riggth
+
 arrowRightImg.addEventListener("click", function () {
-  basseImg = (basseImg + 1) % slides.length;
+  baseImg = (baseImg + 1) % slides.length;
   updateBanner();
 });
 
@@ -54,36 +50,33 @@ let dotsImg = document.createElement("div");
 dotsImg.className = "dots";
 
 function updateBanner() {
-  bannerImg.src = "./assets/images/slideshow/" + slides[basseImg].image;
+  bannerImg.src = "./assets/images/slideshow/" + slides[baseImg].image;
 
   if (bannerTagline) {
-    bannerDiv.removeChild(bannerTagline); //si exsite alors parent suprim bannerDiv
+    bannerDiv.removeChild(bannerTagline);
   }
 
-  bannerTagline = document.createElement("p");
-  bannerTagline.innerHTML = slides[basseImg].tagLine;
+  bannerTagline.innerHTML = slides[baseImg].tagLine;
 
   bannerDiv.appendChild(bannerTagline);
 
   dots.forEach((dot, index) => {
-    dot.classList.toggle("dot_selected", index === basseImg);
+    dot.classList.toggle("dot_selected", index === baseImg);
   });
 }
 
-// Ajoute éléments a bannerGiv
 bannerDiv.appendChild(arrowLeft);
 bannerDiv.appendChild(bannerImg);
 bannerDiv.appendChild(bannerTagline);
 bannerDiv.appendChild(arrowRightImg);
 bannerDiv.appendChild(dotsImg);
 
-// la function sur le dots
 let dots = [];
 slides.forEach((_slide, index) => {
   let dot = document.createElement("span");
   dot.classList.add("dot");
   dot.addEventListener("click", function () {
-    basseImg = index;
+    baseImg = index;
     updateBanner();
   });
 
